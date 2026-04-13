@@ -1,1 +1,0 @@
-{"version":3,"file":"timeline.js","sourceRoot":"","sources":["../../src/features/timeline.ts"],"names":[],"mappings":";;AAAA,gCAEC;AAED,4BAEC;AAND,SAAgB,UAAU;IACxB,OAAO,IAAI,CAAC,GAAG,EAAE,CAAC;AACpB,CAAC;AAED,SAAgB,QAAQ,CAAC,KAAa;IACpC,OAAO,IAAI,CAAC,GAAG,EAAE,GAAG,KAAK,CAAC;AAC5B,CAAC"}
