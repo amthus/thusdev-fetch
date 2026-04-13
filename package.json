@@ -1,26 +1,31 @@
 {
-  "name": "thusdev-fetch",
-  "version": "1.0.1",
-  "description": "A lightweight developer experience engine for HTTP requests with interceptors, plugins, retry, timeout and debug tools",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "build": "tsc",
-    "test": "ts-node test/basic.test.ts"
-  },
-  "keywords": [
-    "http",
-    "fetch",
-    "api",
-    "axios",
-    "ky",
-    "developer-experience",
-    "thusdev"
-  ],
-  "author": "ThusDev",
-  "license": "MIT",
-  "devDependencies": {
-    "ts-node": "^10.9.2",
-    "typescript": "^5.0.0"
-  }
+    "name": "thusdev-fetch",
+    "version": "1.0.1",
+    "description": "A lightweight developer experience engine for HTTP requests with interceptors, plugins, retry, timeout and debug tools",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/amthus/thusdev-fetch"
+    },
+    "homepage": "https://github.com/amthus/thusdev-fetch#readme",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "test": "ts-node test/basic.test.ts"
+    },
+    "keywords": [
+        "http",
+        "fetch",
+        "api",
+        "axios",
+        "ky",
+        "developer-experience",
+        "thusdev"
+    ],
+    "author": "ThusDev",
+    "license": "MIT",
+    "devDependencies": {
+        "ts-node": "^10.9.2",
+        "typescript": "^5.0.0"
+    }
 }

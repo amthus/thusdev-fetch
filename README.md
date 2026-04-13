@@ -5,6 +5,15 @@ A lightweight developer experience engine for API requests.
 It enhances HTTP calls with built-in timeout handling, retry system, interceptors, plugins, debug mode, and performance tracking.
 
 ---
+## Why this exists
+
+Most HTTP clients focus on features.
+
+ThusDev Fetch focuses on developer experience.
+
+It reduces repetitive API logic and standardizes how requests are handled.
+
+---
 
 # Features
 
