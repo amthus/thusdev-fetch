@@ -77,17 +77,6 @@ api.plugins.use({
 });
 ```
 
----
-# Features
-
-Retry mechanism with configurable attempts
-Timeout handling using AbortController
-Request and response interceptors
-Plugin system for extensibility
-Debug mode for development visibility
-Performance tracking (request duration monitoring)
-Automatic error handling and standardized responses
-Fully flexible HTTP request configuration
 
 # Concept
 
