@@ -1,0 +1,2 @@
+export declare function explainError(status?: number): "Network error or request failed." | "Server error. The API is down or unstable." | "Resource not found. Check the URL." | "Unauthorized. Missing or invalid API key." | "Forbidden. You don't have access." | "Unexpected error occurred.";
+//# sourceMappingURL=error-explainer.d.ts.map
