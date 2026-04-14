@@ -10,6 +10,7 @@ import { ThusConfig } from "./config";
 
 export type RequestConfig = {
     url: string;
+    baseURL?: string;
     method?: string;
     headers?: Record<string, string>;
     body?: any;
@@ -24,7 +25,6 @@ export class ThusFetch {
     async request(config: RequestConfig) {
         const execute = async () => {
             const controller = new AbortController();
-
             const start = startTimer();
 
             let finalConfig = config;
@@ -42,13 +42,22 @@ export class ThusFetch {
                 timer = createTimeout(finalConfig.timeout, controller);
             }
 
+            const url = finalConfig.baseURL
+                ? `${finalConfig.baseURL}${finalConfig.url}`
+                : finalConfig.url;
+
             if (ThusConfig.debug) {
-                logger.info(`Request → ${finalConfig.url}`);
+                logger.info(`Request → ${url}`);
             }
+
+            const headers: Record<string, string> = {
+                "Content-Type": "application/json",
+                ...(finalConfig.headers || {})
+            };
 
             const options: RequestInit = {
                 method: finalConfig.method ?? "GET",
-                headers: finalConfig.headers ?? {},
+                headers,
                 signal: controller.signal
             };
 
@@ -56,17 +65,23 @@ export class ThusFetch {
                 options.body = JSON.stringify(finalConfig.body);
             }
 
-            const res = await fetch(finalConfig.url, options);
+            const res = await fetch(url, options);
 
             if (timer) clearTimeout(timer);
 
             const duration = endTimer(start);
 
-            let data = await res.json();
+            let data: any;
+
+            try {
+                data = await res.json();
+            } catch {
+                data = await res.text();
+            }
 
             if (!res.ok) {
                 const message = explainError(res.status);
-                throw new ThusError(message, res.status, finalConfig.url);
+                throw new ThusError(message, res.status, url);
             }
 
             data = this.interceptors.response.reduce(
@@ -77,12 +92,28 @@ export class ThusFetch {
             data = this.plugins.runAfter(data);
 
             if (ThusConfig.debug) {
-                logger.success(`Success → ${finalConfig.url} (${duration}ms)`);
+                logger.success(`Success → ${url} (${duration}ms)`);
             }
 
             return data;
         };
 
         return retry(execute, config.retry || 0);
+    }
+
+    async get(url: string, config: Partial<RequestConfig> = {}) {
+        return this.request({ ...config, url, method: "GET" });
+    }
+
+    async post(url: string, body?: any, config: Partial<RequestConfig> = {}) {
+        return this.request({ ...config, url, body, method: "POST" });
+    }
+
+    async put(url: string, body?: any, config: Partial<RequestConfig> = {}) {
+        return this.request({ ...config, url, body, method: "PUT" });
+    }
+
+    async delete(url: string, config: Partial<RequestConfig> = {}) {
+        return this.request({ ...config, url, method: "DELETE" });
     }
 }
